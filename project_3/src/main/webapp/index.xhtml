@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="primefaces"
+      xmlns:ui="jakarta.faces.facelets">
+
+    <ui:composition template="/templates/page-template.xhtml">
+
+        <ui:define name="pageContent">
+
+            <p:panel header="Kalkulator Kredytowy">
+
+                <p:messages id="msg" />
+
+                <h:form id="form">
+                    <div class="field col-12 md:col-4">
+                    <p:outputLabel for="amountInput" value="Kwota kredytu: "/>
+                    <p:inputNumber id="amountInput"
+                        value="#{calcBB.amount}"
+                        minValue="1"
+                        decimalPlaces="0"
+                        thousandSeparator=" " />
+                    </div>
+                    <br/><br/>
+
+                    <div class="field col-12 md:col-4">
+                    <p:outputLabel for="yearsInput" value="Okres kredytowania (lata)"/>
+                    <p:inputNumber id="yearsInput"
+                        value="#{calcBB.years}"
+                        minValue="1"
+                        decimalPlaces="0" />
+                    </div>
+                    <br/><br/>
+
+                    <div class="field col-12 md:col-4">
+                    <p:outputLabel for="interestInput" value="Oprocentowanie"/>
+                    <p:inputNumber id="interestInput"
+                        value="#{calcBB.interest}"
+                        symbol="%"
+                        symbolPosition="s"
+                        emptyValue="always"
+                        decimalPlaces="2"
+                        minValue="0"
+                        maxValue="100" />
+                    </div>
+                    <br/><br/>
+
+
+                    <p:messages id="msg" />
+
+                    <p:commandButton 
+                        value="Oblicz" 
+                        action="#{calcBB.calc}" 
+                        styleClass="rounded-button"
+                        />
+
+                    <br /><br />
+
+                    <p:commandButton 
+                        value="Oblicz (AJAX)" 
+                        action="#{calcBB.calc_AJAX}" 
+                        update="msg"
+                        process="@form"
+                        ajax="true"
+                        styleClass="rounded-button"
+                        />
+                    <br /><br />
+
+                    <h:commandLink value="Informacje" action="#{calcBB.info()}" />
+                </h:form>
+            </p:panel>
+
+        </ui:define>
+
+    </ui:composition>
+</html>

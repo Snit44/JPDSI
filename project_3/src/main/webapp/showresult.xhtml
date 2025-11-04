@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="primefaces">
+
+<h:head>
+    <title>Wynik kalkulacji</title>
+</h:head>
+
+<h:body>
+
+    <div class="p-d-flex p-jc-center p-ai-center" style="min-height: 80vh;">
+
+        <p:card header="Wynik kalkulatora kredytowego" style="width: 400px;">
+
+            <p:messages />
+
+            <h3 style="text-align:center; margin-top: 0;">
+                Miesięczna rata:
+            </h3>
+
+            <p style="text-align:center; font-size:20px; font-weight: bold; margin-bottom: 20px;">
+                #{calcBB.result} zł
+            </p>
+
+            <h:form>
+                <p:commandButton value="Powrót"
+                                 action="index"
+                                 styleClass="p-button-rounded p-button-primary p-button-sm"
+                                 icon="pi pi-arrow-left"
+                                 update="@form"
+                                 />
+            </h:form>
+
+        </p:card>
+
+    </div>
+
+</h:body>
+</html>
