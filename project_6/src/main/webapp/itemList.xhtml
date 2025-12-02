@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:ui="jakarta.faces.facelets"
+	xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core">
+
+<h:head>
+	<meta charset="utf-8" />
+	<title>JSF 06 - EJB, bazy danych (mapowanie obiektowo-relacyjne)</title>
+</h:head>
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel header="Opcje wyszukiwania" toggleable="true" collapsed="true" style="margin-bottom: 1em;">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Title:" />
+				<p:inputText value="#{itemListBB.title}" />
+				<h:outputLabel value="Category ID:" />
+				<p:inputNumber value="#{itemListBB.categoryId}" decimalPlaces="0" />
+				<p:commandButton value="Szukaj" update="form-table" />
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+
+	<p:messages />
+
+	<h:form id="form-table" style="margin-bottom:1em;">
+
+		<p:commandButton value="Dodaj nowy przedmiot" style="margin-bottom:1em;" action="#{itemListBB.newItem()}" />
+
+		<p:dataTable value="#{itemListBB.list}" var="i">
+
+			<p:column responsivePriority="5">
+				<f:facet name="header">
+					<h:outputText value="Title" />
+				</f:facet>
+				<h:outputText value="#{i.title}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Description" />
+				</f:facet>
+				<h:outputText value="#{i.description}" />
+			</p:column>
+
+			<p:column responsivePriority="4">
+				<f:facet name="header">
+					<h:outputText value="Price" />
+				</f:facet>
+				<h:outputText value="#{i.price}">
+					<f:convertNumber type="currency" currencySymbol="$" />
+				</h:outputText>
+			</p:column>
+
+			<p:column responsivePriority="4">
+				<f:facet name="header">
+					<h:outputText value="Seller ID" />
+				</f:facet>
+				<h:outputText value="#{i.sellerId}" />
+			</p:column>
+
+			<p:column responsivePriority="4">
+				<f:facet name="header">
+					<h:outputText value="Category ID" />
+				</f:facet>
+				<h:outputText value="#{i.categoryId}" />
+			</p:column>
+
+			<p:column responsivePriority="4">
+				<f:facet name="header">
+					<h:outputText value="Condition" />
+				</f:facet>
+				<h:outputText value="#{i.condition}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="opcje" />
+				</f:facet>
+
+				<p:commandButton value="Edytuj" style="margin-right: 0.5em" action="#{itemListBB.editItem(i)}" />
+
+				<p:commandButton value="Usuń" style="margin-right: 0.5em" action="#{itemListBB.deleteItem(i)}"
+					update="@form" />
+
+				<p:button outcome="itemEditGET" value="Edytuj (GET)">
+					<f:param name="p" value="#{i.id}" />
+				</p:button>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+
+</html>

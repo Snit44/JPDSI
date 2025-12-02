@@ -1,0 +1,79 @@
+package com.project6.item;
+
+import java.io.IOException;
+import java.io.Serializable;
+
+import jakarta.ejb.EJB;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.Flash;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
+
+import com.project6.dao.ItemDAO;
+import com.project6.entities.Item;
+
+@Named
+@ViewScoped
+public class ItemEditBB implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private static final String PAGE_ITEM_LIST = "itemList?faces-redirect=true";
+    private static final String PAGE_STAY_AT_THE_SAME = null;
+
+    private Item item = new Item();
+    private Item loaded = null;
+
+    @EJB
+    ItemDAO itemDAO;
+
+    @Inject
+    FacesContext context;
+
+    @Inject
+    Flash flash;
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void onLoad() throws IOException {
+        loaded = (Item) flash.get("item");
+
+      
+        if (loaded != null) {
+            item = loaded;
+          
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędne użycie systemu", null));
+          
+        }
+
+    }
+
+    public String saveData() {
+
+        if (loaded == null) {
+            return PAGE_STAY_AT_THE_SAME;
+        }
+
+        try {
+            if (item.getId() == null) {
+
+                itemDAO.create(item);
+            } else {
+
+                itemDAO.merge(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            context.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "wystąpił błąd podczas zapisu", null));
+            return PAGE_STAY_AT_THE_SAME;
+        }
+
+        return PAGE_ITEM_LIST;
+    }
+}
