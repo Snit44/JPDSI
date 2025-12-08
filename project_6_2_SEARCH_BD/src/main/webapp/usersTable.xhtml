@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <meta charset="utf-8" />
+    <title>Users | Clothby</title>
+
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .footer-line {
+            text-align: center;
+            color: #aaa;
+            font-size: 13px;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .inputGrid label {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+<div class="page-wrapper">
+
+    <div class="header-title">Users</div>
+
+    <h:form>
+        <p:panel header="Search Filters" toggleable="true" collapsed="true"
+                 style="margin-bottom: 20px; border-radius: 6px;">
+
+            <h:panelGrid columns="4" styleClass="inputGrid"
+                         columnClasses="label,value,label,value"
+                         style="margin-bottom:10px;">
+
+                <h:outputLabel value="Username" />
+                <h:inputText value="#{usersListBB.username}" />
+
+                <h:outputLabel value="Email" />
+                <h:inputText value="#{usersListBB.email}" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Search" update="usersTable"
+                             style="margin-right:5px;"
+                             styleClass="p-button-sm" />
+            <p:commandButton value="Reset" action="#{usersListBB.clear}" update="usersTable"
+                             styleClass="p-button-sm p-button-secondary" />
+
+        </p:panel>
+
+        <p:dataTable id="usersTable"
+                     value="#{usersListBB.list}"
+                     var="u"
+                     paginator="true"
+                     rows="10"
+                     rowsPerPageTemplate="5,10,20"
+                     sortBy="#{u.username}"
+                     style="width: 100%; border-radius: 6px;">
+
+            <p:column headerText="ID" sortBy="#{u.userId}">
+                <h:outputText value="#{u.userId}" />
+            </p:column>
+
+            <p:column headerText="Username" sortBy="#{u.username}">
+                <h:outputText value="#{u.username}" />
+            </p:column>
+
+            <p:column headerText="Email" sortBy="#{u.email}">
+                <h:outputText value="#{u.email}" />
+            </p:column>
+
+            <p:column headerText="Created" sortBy="#{u.createdAt}">
+                <h:outputText value="#{u.createdAt}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:outputText>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+    <div class="footer-line">Clothby © 2025</div>
+
+</div>
+
+</h:body>
+</html>

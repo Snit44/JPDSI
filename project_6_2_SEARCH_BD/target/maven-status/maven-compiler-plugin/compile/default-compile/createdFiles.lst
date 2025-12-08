@@ -1,0 +1,11 @@
+com\jsfcourse\entities\Orders.class
+com\jsfcourse\entities\Roles.class
+com\jsfcourse\dao\UsersDAO.class
+com\jsfcourse\entities\Users.class
+com\jsfcourse\entities\Categories.class
+com\jsfcourse\entities\Moderation.class
+com\jsfcourse\entities\ListingImages.class
+com\jsfcourse\entities\Messages.class
+com\jsfcourse\users\UsersListBB.class
+com\jsfcourse\entities\Favorites.class
+com\jsfcourse\entities\Listings.class
