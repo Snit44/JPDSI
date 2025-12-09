@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .page-wrapper {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 0 15px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .error {
+            color: #d9534f;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+<div class="page-wrapper">
+
+    <div class="title">Welcome</div>
+
+    <!-- login form -->
+    <h:form>
+
+        <p:messages id="msg" showDetail="true" closable="true" styleClass="error" />
+
+        <p:panel header="Login">
+
+            <h:panelGrid columns="2" columnClasses="label,value">
+
+                <h:outputLabel value="Email:" />
+                <h:inputText value="#{loginBB.email}" required="true" />
+
+                <h:outputLabel value="Password:" />
+                <h:inputSecret value="#{loginBB.password}" required="true" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Login"
+                             action="#{loginBB.login}"
+                             update="msg"
+                             style="margin-top:10px; width:100%;" />
+        </p:panel>
+
+    </h:form>
+
+    <!-- register button OUTSIDE the form -->
+    <p:button value="Register"
+              href="register.xhtml"
+              style="margin-top:10px; width:100%;"
+              styleClass="p-button-outlined" />
+
+</div>
+
+</h:body>
+</html>

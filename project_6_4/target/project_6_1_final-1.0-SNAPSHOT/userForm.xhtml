@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <meta charset="utf-8" />
+    <title>Add User | Clothby</title>
+
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .page-wrapper {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+        .header-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+<div class="page-wrapper">
+
+    <div class="header-title">Add User</div>
+
+    <h:form>
+
+        <p:panel style="border-radius: 6px;">
+
+            <h:panelGrid columns="2" columnClasses="label,value" style="row-gap:8px;">
+
+                <h:outputLabel value="Username:" />
+                <h:inputText value="#{usersFormBB.user.username}" required="true" />
+
+                <h:outputLabel value="Email:" />
+                <h:inputText value="#{usersFormBB.user.email}" required="true" />
+
+                <h:outputLabel value="Password (hash or plain):" />
+                <h:inputText value="#{usersFormBB.user.hashedPassword}" required="true" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Save"
+                             action="#{usersFormBB.save}"
+                             style="margin-top:15px; width:100%;" />
+
+        </p:panel>
+
+        <p:commandButton value="Back to list"
+                         action="usersTable?faces-redirect=true"
+                         style="margin-top:15px; width:100%;"
+                         styleClass="p-button-outlined" />
+
+    </h:form>
+
+</div>
+
+</h:body>
+</html>
